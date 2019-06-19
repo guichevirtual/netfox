@@ -133,11 +133,6 @@ extension NFXProtocol: URLSessionDataDelegate {
         completionHandler(updatedRequest)
     }
     
-    public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        let wrappedChallenge = URLAuthenticationChallenge(authenticationChallenge: challenge, sender: NFXAuthenticationChallengeSender(handler: completionHandler))
-        client?.urlProtocol(self, didReceive: wrappedChallenge)
-    }
-    
     #if !os(OSX)
     public func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
         client?.urlProtocolDidFinishLoading(self)
